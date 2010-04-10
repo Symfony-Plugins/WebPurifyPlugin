@@ -1,0 +1,36 @@
+# WebPurify Plugin
+
+## Introduction
+[WebPurify](http://www.webpurify.com) provides a cost-effective real-time profanity filtering service.
+
+This plugin provides *sfWebPurifyProfanityValidator*, which rejects a value if it contains profanity.
+
+Future versions may implement the [other methods](http://www.webpurify.com/profanity/filter/documentation.php) available from WebPurify
+
+## Configuration
+
+Purchase an API key from WebPurify.  You can signup for a test license by entering *localhost* for the IP address.
+
+Add the following to your *app.yml* file:
+
+    all:
+        webpurify:
+            api_key: YOUR API KEY HERE
+
+
+To use it in your forms, combine it with the existing validator for a given field by using *sfValidatorAnd*:
+
+    [php]
+    $this->validatorSchema['name'] = new sfValidatorAnd(array(
+      $this->validatorSchema['name']
+      , new WebPurifyProfanityValidator()
+    ));
+
+You could also invoke the *LiveCheck* method without the validator by doing this:
+
+    [php]
+    $command = new WebPurifyLiveCheckCommand(sfConfig::get('app_webpurify_api_key'), 'Text to check for profanity');
+    $isClean = $command->isClean(); //returns TRUE or FALSE
+
+## Support
+We developed and released this plugin, but we are not affiliated with WebPurify so do not contact us for WP support issues.
