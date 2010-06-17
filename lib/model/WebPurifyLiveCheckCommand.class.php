@@ -34,7 +34,7 @@ class WebPurifyLiveCheckCommand extends AbstractWebPurifyCommand
     public function isClean()
     {
         $response = $this->getResponse();
-        if ($response != 0)
+        if ($response == null || $response === false || $response != 0)
         {
             return false;
         }
