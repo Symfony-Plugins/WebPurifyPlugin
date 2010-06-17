@@ -43,6 +43,8 @@ abstract class AbstractWebPurifyCommand
 
     /**
      * Perform the WebPurify query and return a SimpleXMLElement object as the response.
+     * The following must be set in php.ini
+     * allow_url_fopen = On
      * @return SimpleXMLElement
      */
     public final function execute()
@@ -54,8 +56,8 @@ abstract class AbstractWebPurifyCommand
                 $this->response = simplexml_load_file($this->buildUrl(),'SimpleXMLElement');
             } catch (Exception $e)
             {
-                //TODO: do something with the exception
-                $this->response = $e;
+                sfContext::getInstance()->getLogger()->err('Error connecting to profanity filter: ' . $e);
+                $this->response = false;
             }
         }
         return $this->response;
