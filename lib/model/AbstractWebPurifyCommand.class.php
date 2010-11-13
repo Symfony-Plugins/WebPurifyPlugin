@@ -6,7 +6,7 @@
  */
 abstract class AbstractWebPurifyCommand
 {
-    private $restEndpointUrl = 'http://www.webpurify.com/services/rest/';
+    private $restEndpointUrl = 'http://api1.webpurify.com/services/rest/';
     protected $apiKey = '';
     protected $parameters = array(
         'lang' => 'en'
