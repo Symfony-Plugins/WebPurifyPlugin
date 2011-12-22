@@ -54,7 +54,7 @@ abstract class AbstractWebPurifyCommand
             try
             {
                 $browser = new sfWebBrowser();
-                $this->response = $browser->get($this->buildUrl())->getResponseXML();
+                $browser = new sfWebBrowser(array(), 'sfCurlAdapter', array('Timeout'=>10));
                 //$this->response = simplexml_load_file($this->buildUrl(),'SimpleXMLElement');
             } catch (Exception $e)
             {
