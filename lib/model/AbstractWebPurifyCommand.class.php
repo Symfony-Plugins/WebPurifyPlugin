@@ -53,7 +53,9 @@ abstract class AbstractWebPurifyCommand
         {
             try
             {
-                $this->response = simplexml_load_file($this->buildUrl(),'SimpleXMLElement');
+                $browser = new sfWebBrowser();
+                $this->response = $browser->get($this->buildUrl())->getResponseXML();
+                //$this->response = simplexml_load_file($this->buildUrl(),'SimpleXMLElement');
             } catch (Exception $e)
             {
                 sfContext::getInstance()->getLogger()->err('Error connecting to profanity filter: ' . $e);
